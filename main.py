@@ -1,15 +1,17 @@
 from flask import Flask,jsonify,request
 from flasgger import Swagger
 from sklearn.externals import joblib
-from flask_cors import CORS
 import numpy as np
+from flask_cors import CORS
+
 import pandas as pd
 
 app = Flask(__name__)
 Swagger(app)
+CORS(app)
 
 @app.route('/input/task', methods=['POST'])
-def classifier():
+def predict():
     """
     Ini Adalah Endpoint Untuk Mengklasifikasi KACA
     ---
@@ -69,4 +71,5 @@ def classifier():
 
     return jsonify({'message': format(resultPredict)})
 
-app.run(debug=True)
+if __name__ == '__main__' :
+ app.run(debug=True)
