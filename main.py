@@ -1,15 +1,14 @@
 from flask import Flask,jsonify,request
 from flasgger import Swagger
 from sklearn.externals import joblib
-import numpy as np
 from flask_cors import CORS
+import numpy as np
+import pandas as pd
 
 app = Flask(__name__)
 Swagger(app)
-CORS(app)
 
 @app.route('/input/task', methods=['POST'])
-
 def classifier():
     """
     Ini Adalah Endpoint Untuk Mengklasifikasi KACA
@@ -62,12 +61,12 @@ def classifier():
     Na = new_task['Na']
 
     X_New = np.array([[Mg,RI,Al,Ca,Na]])
+    x_new = X_New.reshape(1,-1)
 
-    clf = joblib.load('GlassknnClassifierbaru.pkl')
+    clf = joblib.load('GlassKnnClassifier.pkl')
 
-    resultPredict = clf[0].classifier(X_New)
+    resultPredict = clf[0].predict(x_new)
 
-    return jsonify({'message': format(clf[1].target_names[resultPredict])})
+    return jsonify({'message': format(resultPredict)})
 
-
-app.run()
+app.run(debug=True)
