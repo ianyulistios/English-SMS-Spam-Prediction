@@ -12,7 +12,6 @@ MarkupSafe==1.0
 mistune==0.8.3
 numpy==1.14.2
 pandas==0.23.0
-python-dateutil==2.7.3
 pytz==2018.4
 PyYAML==3.12
 scikit-learn==0.19.1
