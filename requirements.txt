@@ -3,8 +3,10 @@ click==6.7
 flasgger==0.8.3
 Flask==1.0.2
 Flask-Cors==3.0.4
+gunicorn==19.8.1
 itsdangerous==0.24
 Jinja2==2.10
+joblib==0.11
 jsonschema==2.6.0
 MarkupSafe==1.0
 mistune==0.8.3
