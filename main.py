@@ -13,7 +13,7 @@ CORS(app)
 @app.route('/input/task', methods=['POST'])
 def predict():
     """
-    Ini Adalah Endpoint Untuk Mengklasifikasi KACA
+    Ini Adalah Endpoint Untuk Mengklasifikasi Jamur
     ---
     tags:
         - Rest Controller
@@ -24,50 +24,46 @@ def predict():
         schema:
           id: Petal
           required:
-            - Mg
-            - RI
-            - Al
-            - Ca
-            - Na
+            - odor
+            - gill-size
+            - gill-color
+            - spore-print-color
+
           properties:
-            Mg:
-              type: float
+            odor:
+              type: int
               description: Please input with valid Magnesium.
               default: 0
-            RI:
-              type: float
+            gill-size:
+              type: int
               description: Please input with valid Refractive Index.
               default: 0
-            Al:
-              type: float
+            gill-color:
+              type: int
               description: Please input with valid Almunium.
               default: 0
-            Ca:
-              type: float
+            spore-print-color:
+              type: int
               description: Please input with valid Calcium.
               default: 0
-            Na:
-              type: float
-              description: Please input with valid Sodium.
-              default: 0
+
     responses:
         200:
             description: Success Input
     """
     new_task = request.get_json()
 
-    Mg = new_task['Mg']
-    RI = new_task['RI']
-    Al = new_task['Al']
-    Ca = new_task['Ca']
-    Na = new_task['Na']
+    odor = new_task['odor']
+    gill_s = new_task['gill-size']
+    gill_c = new_task['gill-color']
+    spore_p_c = new_task['spore-print-color']
 
-    X_New = np.array([[Mg,RI,Al,Ca,Na]])
+    X_New = np.array([[odor,gill_c,gill_s,spore_p_c]])
     x_new = X_New.reshape(1,-1)
 
-    clf = joblib.load('GlassKnnClassifier.pkl')
+    knn = joblib.load('MushroomClassifier.pkl')
 
-    resultPredict = clf[0].predict(x_new)
+    resultPredict = knn[0].predict(x_new)
 
     return jsonify({'message': format(resultPredict)})
 
