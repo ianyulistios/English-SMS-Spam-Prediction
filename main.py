@@ -53,17 +53,13 @@ def predict():
     """
     new_task = request.get_json()
 
-    odor = new_task['odor']
-    gill_s = new_task['gill-size']
-    gill_c = new_task['gill-color']
-    spore_p_c = new_task['spore-print-color']
+    text = new_task['text']
 
-    X_New = np.array([[odor,gill_c,gill_s,spore_p_c]])
-    x_new = X_New.reshape(1,-1)
+    X_New = np.array([text])
 
-    knn = joblib.load('MushroomClassifier.pkl')
+    pipe = joblib.load('SpamSMS.pkl')
 
-    resultPredict = knn[0].predict(x_new)
+    resultPredict = pipe[0].predict(X_New)
 
     return jsonify({'message': format(resultPredict)})
 
