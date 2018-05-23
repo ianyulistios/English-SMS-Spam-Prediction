@@ -24,28 +24,14 @@ def predict():
         schema:
           id: Petal
           required:
-            - odor
-            - gill-size
-            - gill-color
-            - spore-print-color
+            - text
 
           properties:
-            odor:
-              type: int
-              description: Please input with valid Magnesium.
+            text:
+              type: string
+              description: Please input with valid text.
               default: 0
-            gill-size:
-              type: int
-              description: Please input with valid Refractive Index.
-              default: 0
-            gill-color:
-              type: int
-              description: Please input with valid Almunium.
-              default: 0
-            spore-print-color:
-              type: int
-              description: Please input with valid Calcium.
-              default: 0
+
 
     responses:
         200:
